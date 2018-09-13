@@ -1,4 +1,4 @@
-function older()
+function getOlderStuff()
 {
     const staff = {
         "Вася": -23,
@@ -12,27 +12,19 @@ function older()
     console.log(maxAge);
     
     for (const key in staff) {
-        if (maxAge == undefined)
-        {
-            maxAge = staff[key];
-            staffName = key;
-            continue;
-        } 
-        else if (maxAge < staff[key]) 
+        if (maxAge < staff[key] || maxAge == undefined)
         {
             maxAge = staff[key];
             staffName = key;
         }
     }
-    
-    let olderStaff =
-    {
+
+    return {
         name: staffName,
         age: maxAge
-    };
-    return olderStaff;
+    }
 }
 
-var olderStaff = older()
+var olderStaff = getOlderStuff()
 
 alert(olderStaff.name + ': ' + olderStaff.age);
