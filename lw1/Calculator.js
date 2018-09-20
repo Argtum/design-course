@@ -1,13 +1,27 @@
-var calculator = new function()
+const Calculator = function()
 {
-    this.read = {
-        firstNum: Number(prompt('Введите первое число', '')),
-        secondNum: Number(prompt('Введите второе число', ''))
-    }
-    this.sum = this.read.firstNum + this.read.secondNum;
-    this.mul = this.read.firstNum * this.read.secondNum;
+    this.firstNum = 0;
+    this.secondNum = 0;
+
+    this.read = function() {
+        this.firstNum = parseInt(prompt('Введите первое число', 0), 10) || 0;
+        this.secondNum = parseInt(prompt('Введите второе число', 0), 10) || 0;
+    };
+
+    this.sum = function() {
+        return this.firstNum + this.secondNum;
+    };
+
+    this.mul = function() {
+        return this.firstNum * this.secondNum;
+    };
 }
 
-calculator.read;
-alert( "Сумма = " + calculator.sum );
-alert( "Произведение = " + calculator.mul );
+function main() {
+    const calculation = new Calculator();
+    calculation.read();
+    console.log("Сумма = ", calculation.sum());
+    console.log("Произведение = ", calculation.mul());
+}
+
+main();
