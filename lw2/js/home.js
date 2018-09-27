@@ -24,7 +24,7 @@ function drawCloud(ctx, startX, startY) {
 function drawSky(ctx) {
     //sun
     ctx.beginPath();
-    ctx.arc(20, 20, 100, 0, Math.PI * 2);
+    ctx.arc(20, 20, 50, 0, Math.PI * 2);
     ctx.fillStyle = '#FFEA93';
     ctx.fill();
 
