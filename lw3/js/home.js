@@ -1,11 +1,7 @@
-function drawBackground(ctx, canvasWidth) {
+function drawTopBackground(ctx, canvasWidth, color) {
     //top background
-    ctx.fillStyle = 'rgb(0, 148, 255)';
+    ctx.fillStyle = "hsl(" + (400 - color * 2) + "," + color + "%," + color + "%)";
     ctx.fillRect(0, 0, canvasWidth, 400);
-
-    //bottom background
-    ctx.fillStyle = '#42B14E';
-    ctx.fillRect(0, 400, canvasWidth, 100);
 }
 
 function drawCloudPart(ctx, startX, startY, radiusX, radiusY, color) {
@@ -15,10 +11,10 @@ function drawCloudPart(ctx, startX, startY, radiusX, radiusY, color) {
     ctx.fill();
 }
 
-function drawCloud(ctx, startX, startY) {
-    drawCloudPart(ctx, startX, startY, 50, 25, '#C8E0F4');
-    drawCloudPart(ctx, startX - 35, startY + 10, 50, 25, '#C8E0F4');
-    drawCloudPart(ctx, startX + 35, startY + 10, 50, 25, '#C8E0F4');
+function drawCloud(ctx, sky) {
+    drawCloudPart(ctx, sky.x - 30, sky.y - 15, 40, 25, '#C8E0F4');
+    drawCloudPart(ctx, sky.x + 25, sky.y - 20, 40, 25, '#C8E0F4');
+    drawCloudPart(ctx, sky.x, sky.y, 40, 25, '#C8E0F4');
 }
 
 function drawSun(ctx, sun) {
@@ -28,10 +24,10 @@ function drawSun(ctx, sun) {
     ctx.fill();
 }
 
-function drawSky(ctx) {
-    drawCloud(ctx, 500, 70);
-    drawCloud(ctx, 200, 150);
-    drawCloud(ctx, 800, 130);
+function drawSky(ctx, sky) {
+    drawCloud(ctx, sky);
+    drawCloud(ctx, sky);
+    drawCloud(ctx, sky);
 }
 
 function drawHouse(ctx) {
@@ -68,41 +64,80 @@ function drawHouse(ctx) {
     ctx.stroke();
 }
 
-function Sun({startX, startY, angle}) {
+function drawBotomBackground(ctx, canvasWidth) {
+    //bottom background
+    ctx.fillStyle = '#42B14E';
+    ctx.fillRect(0, 400, canvasWidth, 100);
+}
+
+function Sun({startX, startY, angle, speed}) {
     this.x = startX;
     this.y = startY;
     this.angle = angle;
+    this.speed = speed;
 }
 
-function redraw(ctx, canvasWidth, sun) {
-    drawBackground(ctx, canvasWidth);
+function Sky({startX, startY, speed}) {
+    this.x = startX;
+    this.y = startY;
+    this.speed = speed;
+}
+
+function redraw(ctx, canvasWidth, sun, skys) {
+    drawTopBackground(ctx, canvasWidth, sun.color);
     drawSun(ctx, sun);
-    drawSky(ctx);
+    for (const sky of skys) {
+        drawSky(ctx, sky);
+    }
+    drawBotomBackground(ctx, canvasWidth);
     drawHouse(ctx);
 }
 
-function update(sun, dt) {
-    const speed = 1;
-    let deltaAngle;
-    deltaAngle = speed * dt;
+function update(sun, dt, skys) {
+    const deltaAngle = sun.speed * dt;
     sun.angle += deltaAngle;
-
 
     sun.x = Math.cos(sun.angle) * 400 + 500;
     sun.y = Math.sin(sun.angle) * 400 + 400;
-    console.log(sun.x, sun.y);
+    sun.color = (900 - sun.y) / 10;
+
+    console.log(sun.color);
+
+    for (let sky of skys) {
+        const cloudStep = sky.speed * dt;
+        if (sky.x < -200) {
+            sky.x = 1200;
+        }
+        sky.x -= cloudStep;
+    }
 }
 
 function CreateSun() {
     const startX = 0;
     const startY = 0;
     const angle = 0;
+    const speed = 0.25;
+    const color = 50;
 
     return new Sun({
         startX,
         startY,
-        angle
+        angle,
+        speed,
+        color
     })
+}
+
+function CreateSky({cloudHeight, cloudSpeed}) {
+    const startX = Math.random() * 1200;
+    const startY = Math.random() * cloudHeight;
+    const speed = Math.random() * cloudSpeed;
+
+    return new Sky({
+        startX,
+        startY,
+        speed
+    });
 }
 
 function main() {
@@ -110,10 +145,23 @@ function main() {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
     const ctx = canvas.getContext('2d');
+
+    let skys = [];
+    const cloudNumber = 3;
     let sun;
+
+    for (let i = 0; i < cloudNumber; ++i) {
+        skys.push(CreateSky({
+            cloudHeight: 200,
+            cloudSpeed: 100
+        }));
+    }
+
+    console.log(skys);
+
     sun = CreateSun();
 
-    redraw(ctx, canvas.width, sun);
+    redraw(ctx, canvas.width, sun, skys);
 
     let lastTimestamp = Date.now(); //текущее время в ms
     const animateFn = () => {
@@ -121,11 +169,10 @@ function main() {
         const deltaTime = (currentTimeStamp - lastTimestamp) * 0.001; //сколько секунд прошло с прошлого кадра
         lastTimestamp = currentTimeStamp;
 
-        update(sun, deltaTime);
-        redraw(ctx, canvas.width, sun);
+        update(sun, deltaTime, skys);
+        redraw(ctx, canvas.width, sun, skys);
         requestAnimationFrame(animateFn);
     };
-
     animateFn();
 }
 
