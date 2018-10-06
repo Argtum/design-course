@@ -1,5 +1,4 @@
-function drawTopBackground(ctx, canvasWidth, color) {
-    //top background
+function drawSky(ctx, canvasWidth, color) {
     ctx.fillStyle = "hsl(" + (400 - color * 2) + "," + color + "%," + color + "%)";
     ctx.fillRect(0, 0, canvasWidth, 400);
 }
@@ -24,7 +23,7 @@ function drawSun(ctx, sun) {
     ctx.fill();
 }
 
-function drawSky(ctx, sky) {
+function drawClouds(ctx, sky) {
     drawCloud(ctx, sky);
     drawCloud(ctx, sky);
     drawCloud(ctx, sky);
@@ -64,8 +63,7 @@ function drawHouse(ctx) {
     ctx.stroke();
 }
 
-function drawBotomBackground(ctx, canvasWidth) {
-    //bottom background
+function drawGround(ctx, canvasWidth) {
     ctx.fillStyle = '#42B14E';
     ctx.fillRect(0, 400, canvasWidth, 100);
 }
@@ -77,19 +75,19 @@ function Sun({startX, startY, angle, speed}) {
     this.speed = speed;
 }
 
-function Sky({startX, startY, speed}) {
+function Cloud({startX, startY, speed}) {
     this.x = startX;
     this.y = startY;
     this.speed = speed;
 }
 
 function redraw(ctx, canvasWidth, sun, skys) {
-    drawTopBackground(ctx, canvasWidth, sun.color);
+    drawSky(ctx, canvasWidth, sun.color);
     drawSun(ctx, sun);
     for (const sky of skys) {
-        drawSky(ctx, sky);
+        drawClouds(ctx, sky);
     }
-    drawBotomBackground(ctx, canvasWidth);
+    drawGround(ctx, canvasWidth);
     drawHouse(ctx);
 }
 
@@ -100,8 +98,6 @@ function update(sun, dt, skys) {
     sun.x = Math.cos(sun.angle) * 400 + 500;
     sun.y = Math.sin(sun.angle) * 400 + 400;
     sun.color = (900 - sun.y) / 10;
-
-    console.log(sun.color);
 
     for (let sky of skys) {
         const cloudStep = sky.speed * dt;
@@ -128,12 +124,12 @@ function CreateSun() {
     })
 }
 
-function CreateSky({cloudHeight, cloudSpeed}) {
+function CreateClouds({cloudHeight, cloudSpeed}) {
     const startX = Math.random() * 1200;
     const startY = Math.random() * cloudHeight;
     const speed = Math.random() * cloudSpeed;
 
-    return new Sky({
+    return new Cloud({
         startX,
         startY,
         speed
@@ -145,25 +141,21 @@ function main() {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
     const ctx = canvas.getContext('2d');
-
+    let lastTimestamp = Date.now(); //текущее время в ms
     let skys = [];
     const cloudNumber = 3;
     let sun;
 
     for (let i = 0; i < cloudNumber; ++i) {
-        skys.push(CreateSky({
+        skys.push(CreateClouds({
             cloudHeight: 200,
             cloudSpeed: 100
         }));
     }
 
-    console.log(skys);
-
     sun = CreateSun();
-
     redraw(ctx, canvas.width, sun, skys);
 
-    let lastTimestamp = Date.now(); //текущее время в ms
     const animateFn = () => {
         const currentTimeStamp = Date.now();
         const deltaTime = (currentTimeStamp - lastTimestamp) * 0.001; //сколько секунд прошло с прошлого кадра

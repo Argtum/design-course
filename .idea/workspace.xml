@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec677aed-3108-4712-bb1a-ddfaab3643e6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lw1/Calculator.html" beforeDir="false" afterPath="$PROJECT_DIR$/lw1/Calculator.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lw1/Calculator.js" beforeDir="false" afterPath="$PROJECT_DIR$/lw1/Calculator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lw1/older.html" beforeDir="false" afterPath="$PROJECT_DIR$/lw1/older.html" afterDir="false" />
@@ -12,12 +12,7 @@
       <change beforePath="$PROJECT_DIR$/lw1/weekday.js" beforeDir="false" afterPath="$PROJECT_DIR$/lw1/weekday.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lw1/workWithObject.html" beforeDir="false" afterPath="$PROJECT_DIR$/lw1/workWithObject.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lw1/workWithObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/lw1/workWithObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lw2/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/lw2/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lw2/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/lw2/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lw2/style/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/lw2/style/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lw3/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/lw3/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lw3/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/lw3/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lw3/style/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/lw3/style/home.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,23 +57,33 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1021588499">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.49" value="1" />
+          <entry key="project.open.time.82" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="js" value="71" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JavaScript" value="71" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lw3/js/home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="84" column="20" lean-forward="true" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lw3/home.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+            <state relative-caret-position="294">
+              <caret line="67" column="43" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -102,13 +107,13 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="260" />
     <option name="y" value="100" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
@@ -116,39 +121,23 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="design-course" type="b2602c69:ProjectViewProjectNode" />
-              <item name="design-course" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="design-course" type="b2602c69:ProjectViewProjectNode" />
-              <item name="design-course" type="462c0819:PsiDirectoryNode" />
-              <item name="lw2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="design-course" type="b2602c69:ProjectViewProjectNode" />
-              <item name="design-course" type="462c0819:PsiDirectoryNode" />
-              <item name="lw3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="design-course" type="b2602c69:ProjectViewProjectNode" />
-              <item name="design-course" type="462c0819:PsiDirectoryNode" />
-              <item name="lw3" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="designing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="designing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="/usr/share/nginx/html" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
@@ -181,17 +170,19 @@
       <workItem from="1538595163369" duration="323000" />
       <workItem from="1538597642051" duration="291000" />
       <workItem from="1538598768830" duration="8057000" />
+      <workItem from="1538693299640" duration="334000" />
+      <workItem from="1538831811346" duration="1641000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9376000" />
+    <option name="totallyTimeSpent" value="11351000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1200" extended-state="6" />
+    <frame x="260" y="100" width="1366" height="768" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19530416" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20151515" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -221,15 +212,15 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/lw3/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="150">
           <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lw3/js/home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="84" column="20" lean-forward="true" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
+        <state relative-caret-position="294">
+          <caret line="67" column="43" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
         </state>
       </provider>
     </entry>
