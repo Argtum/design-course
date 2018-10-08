@@ -11,8 +11,8 @@ function drawCloudPart(ctx, startX, startY, radiusX, radiusY, color) {
 }
 
 function drawCloud(ctx, sky) {
-    drawCloudPart(ctx, sky.x - 30, sky.y - 15, 40, 25, '#C8E0F4');
-    drawCloudPart(ctx, sky.x + 25, sky.y - 20, 40, 25, '#C8E0F4');
+    drawCloudPart(ctx, sky.x - 30, sky.y + 15, 40, 25, '#C8E0F4');
+    drawCloudPart(ctx, sky.x + 25, sky.y + 20, 40, 25, '#C8E0F4');
     drawCloudPart(ctx, sky.x, sky.y, 40, 25, '#C8E0F4');
 }
 
@@ -124,7 +124,7 @@ function CreateSun() {
     })
 }
 
-function CreateClouds({cloudHeight, cloudSpeed}) {
+function CreateCloud({cloudHeight, cloudSpeed}) {
     const startX = Math.random() * 1200;
     const startY = Math.random() * cloudHeight;
     const speed = Math.random() * cloudSpeed;
@@ -147,7 +147,7 @@ function main() {
     let sun;
 
     for (let i = 0; i < cloudNumber; ++i) {
-        skys.push(CreateClouds({
+        skys.push(CreateCloud({
             cloudHeight: 200,
             cloudSpeed: 100
         }));
