@@ -1,24 +1,38 @@
+const CIRCLE_START_ANGLE = 0;
+const CIRCLE_END_ANGLE = Math.PI * 2;
+const ROTATION = Math.PI * 2;
+
+const LEFT_EDGE_SCREEN = -200;
+const RIGHT_EDGE_SCREEN = 1200;
+
+const CLOUD_RADIUS_X = 40;
+const CLOUD_RADIUS_Y = 25;
+const NUMBERS_OF_CLOUDS = 3;
+const CLOUDS_HEIGHT = 200;
+const CLOUDS_SPEED = 150;
+
 function drawSky(ctx, canvasWidth, color) {
-    ctx.fillStyle = "hsl(" + (400 - color * 2) + "," + color + "%," + color + "%)";
+    console.log(color);
+    ctx.fillStyle = "hsl(" + (CIRCLE_END_ANGLE - color * 1.7) + "," + color + "%," + color + "%)";
     ctx.fillRect(0, 0, canvasWidth, 400);
 }
 
 function drawCloudPart(ctx, startX, startY, radiusX, radiusY, color) {
     ctx.beginPath();
-    ctx.ellipse(startX, startY, radiusX, radiusY, 0, 0, Math.PI * 2);
+    ctx.ellipse(startX, startY, radiusX, radiusY, ROTATION, CIRCLE_START_ANGLE, CIRCLE_END_ANGLE);
     ctx.fillStyle = color;
     ctx.fill();
 }
 
 function drawCloud(ctx, sky) {
-    drawCloudPart(ctx, sky.x - 30, sky.y + 15, 40, 25, '#C8E0F4');
-    drawCloudPart(ctx, sky.x + 25, sky.y + 20, 40, 25, '#C8E0F4');
-    drawCloudPart(ctx, sky.x, sky.y, 40, 25, '#C8E0F4');
+    drawCloudPart(ctx, sky.x - 30, sky.y + 15, sky.radX, sky.radY, '#C8E0F4');
+    drawCloudPart(ctx, sky.x + 25, sky.y + 20, sky.radX, sky.radY, '#C8E0F4');
+    drawCloudPart(ctx, sky.x, sky.y, sky.radX, sky.radY, '#C8E0F4');
 }
 
 function drawSun(ctx, sun) {
     ctx.beginPath();
-    ctx.arc(sun.x, sun.y, 50, 0, Math.PI * 2);
+    ctx.arc(sun.x, sun.y, sun.radius, sun.color, CIRCLE_START_ANGLE, CIRCLE_END_ANGLE);
     ctx.fillStyle = '#FFEA93';
     ctx.fill();
 }
@@ -68,17 +82,24 @@ function drawGround(ctx, canvasWidth) {
     ctx.fillRect(0, 400, canvasWidth, 100);
 }
 
-function Sun({startX, startY, angle, speed}) {
-    this.x = startX;
-    this.y = startY;
-    this.angle = angle;
-    this.speed = speed;
+function Sun({sunStartX, sunStartY, sunX, sunY, sunRadius, sunMoveAngle, sunSpeed, sunMoveRadius, sunColor}) {
+    this.startX = sunStartX;
+    this.startY = sunStartY;
+    this.X = sunX;
+    this.y = sunY;
+    this.radius = sunRadius;
+    this.angle = sunMoveAngle;
+    this.speed = sunSpeed;
+    this.moveRadius = sunMoveRadius;
+    this.color = sunColor;
 }
 
-function Cloud({startX, startY, speed}) {
+function Cloud({startX, startY, speed, radiusX, radiusY}) {
     this.x = startX;
     this.y = startY;
     this.speed = speed;
+    this.radX = radiusX;
+    this.radY = radiusY;
 }
 
 function redraw(ctx, canvasWidth, sun, skys) {
@@ -95,44 +116,32 @@ function update(sun, dt, skys) {
     const deltaAngle = sun.speed * dt;
     sun.angle += deltaAngle;
 
-    sun.x = Math.cos(sun.angle) * 400 + 500;
-    sun.y = Math.sin(sun.angle) * 400 + 400;
-    sun.color = (900 - sun.y) / 10;
+    sun.x = Math.cos(sun.angle) * sun.moveRadius + sun.startX;
+    sun.y = Math.sin(sun.angle) * sun.moveRadius + sun.startY;
+    sun.color = (800 - sun.y) / 10;
 
     for (let sky of skys) {
         const cloudStep = sky.speed * dt;
-        if (sky.x < -200) {
-            sky.x = 1200;
+        if (sky.x < LEFT_EDGE_SCREEN) {
+            sky.x = RIGHT_EDGE_SCREEN;
         }
         sky.x -= cloudStep;
     }
 }
 
-function CreateSun() {
-    const startX = 0;
-    const startY = 0;
-    const angle = 0;
-    const speed = 0.25;
-    const color = 50;
-
-    return new Sun({
-        startX,
-        startY,
-        angle,
-        speed,
-        color
-    })
-}
-
-function CreateCloud({cloudHeight, cloudSpeed}) {
-    const startX = Math.random() * 1200;
+function CreateCloud({start, cloudHeight, cloudSpeed, cloudRadiusX, cloudRadiusY}) {
+    const startX = Math.random() * start;
     const startY = Math.random() * cloudHeight;
     const speed = Math.random() * cloudSpeed;
+    const radiusX = cloudRadiusX;
+    const radiusY = cloudRadiusY;
 
     return new Cloud({
         startX,
         startY,
-        speed
+        speed,
+        radiusX,
+        radiusY
     });
 }
 
@@ -143,17 +152,27 @@ function main() {
     const ctx = canvas.getContext('2d');
     let lastTimestamp = Date.now(); //текущее время в ms
     let skys = [];
-    const cloudNumber = 3;
-    let sun;
+    const sunStartX = 500;
+    const sunStartY = 400;
+    const sunX = 0;
+    const sunY = 0;
+    const sunRadius = 50;
+    const sunMoveAngle = 3;
+    const sunSpeed = 0.25;
+    const sunColor = 50;
+    const sunMoveRadius = 400;
 
-    for (let i = 0; i < cloudNumber; ++i) {
+    for (let i = 0; i < NUMBERS_OF_CLOUDS; ++i) {
         skys.push(CreateCloud({
-            cloudHeight: 200,
-            cloudSpeed: 100
+            start: RIGHT_EDGE_SCREEN,
+            cloudHeight: CLOUDS_HEIGHT,
+            cloudSpeed: CLOUDS_SPEED,
+            cloudRadiusX: CLOUD_RADIUS_X,
+            cloudRadiusY: CLOUD_RADIUS_Y
         }));
     }
 
-    sun = CreateSun();
+    let sun = new Sun({sunStartX, sunStartY, sunX, sunY, sunRadius, sunMoveAngle, sunSpeed, sunMoveRadius, sunColor});
     redraw(ctx, canvas.width, sun, skys);
 
     const animateFn = () => {
